@@ -41,6 +41,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundleLazy 'ujihisa/unite-colorscheme', {'autoload': {'unite_sources': 'colorscheme'}}          " Allows unite to auto switch between colorschemes
 NeoBundleLazy 'osyo-manga/unite-fold', {'autoload': {'unite_sources': 'fold'}}                     " Allows unite to get a list of folds in the current buffer
 NeoBundleLazy 'Shougo/neomru.vim', {'autoload':{'unite_sources': ['file_mru', 'directory_mru']}}   " Allows unite to create a list of mru files
+NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}            " Improved indentation and syntax support
 NeoBundle 'kopischke/unite-spell-suggest'                                                          " Allows spell check to use the unite plugin for finding suggestions
 NeoBundle 'Shougo/neocomplete.vim'                                                                 " Auto completion framework. Requires that vim be compiled with lua support
 NeoBundle 'davidhalter/jedi-vim'                                                                   " Python autocompletion
@@ -49,7 +50,6 @@ NeoBundle 'scrooloose/nerdtree'                                                 
 NeoBundle 'JarrodCTaylor/vim-256-color-schemes'                                                    " A variety of terminal based colorschemes
 NeoBundle 'majutsushi/tagbar'                                                                      " Display tags in a buffer ordered by class
 NeoBundle 'ervandew/supertab'                                                                      " Use tab for all completions
-NeoBundle 'pangloss/vim-javascript'                                                                " Improved indentation and syntax support
 NeoBundle 'scrooloose/syntastic'                                                                   " Syntax checking
 NeoBundle 'vim-scripts/UltiSnips'                                                                  " Ultimate solution for snippets
 NeoBundle 'tpope/vim-commentary'                                                                   " Comment stuff out
@@ -83,6 +83,7 @@ NeoBundle 'tpope/vim-dispatch'                                                  
 NeoBundle 'kien/ctrlp.vim'                                                                         " Because I just can't get unit to work all the way :(
 NeoBundle 'takac/vim-hardtime'                                                                     " Muhahahahaha oh their faces. I can taste their tears
 NeoBundle 'JarrodCTaylor/vim-sql-suggest'                                                          " SQL auto completion
+NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle '~/dotfiles/vim/my-plugins/nerd-search', {'type': 'nosync'}                              " Search in a specific directory from within nerdtree
 NeoBundle '~/dotfiles/vim/my-plugins/vim-grep-quickfix', {'type': 'nosync'}                        " Add grep functionality to the quickfix buffer
 NeoBundle '~/dotfiles/vim/my-plugins/vim-wiki-links', {'type': 'nosync'}                           " Add the ability to link between wiki (markdown) files
@@ -327,7 +328,7 @@ augroup END
 " Javascript/Json {{{
 augroup ft_javascript
 	au!
-		au BufNewFile,BufRead *.js set filetype=javascript syntax=jquery
+	" au BufNewFile,BufRead *.js set filetype=javascript syntax=jquery
 		au BufNewFile,BufRead *.js setlocal foldmethod=marker
 		au BufNewFile,BufRead *.json set filetype=javascript
 augroup end
@@ -352,9 +353,9 @@ augroup END
 " }}}
 " }}}
 " Color Scheme ----------------------------------------------------------------- {{{
-" let g:solarized_termcolors = 256
-" let g:solarized_termtrans = 1
-" colorscheme solarized                         " Set colors
+"let g:solarized_termcolors=256
+"let g:solarized_termtrans=1
+"colorscheme solarized                         " Set colors
 " set t_Co=256
 colorscheme harlem-nights
 " }}}
