@@ -329,8 +329,8 @@ augroup END
 augroup ft_javascript
 	au!
 	" au BufNewFile,BufRead *.js set filetype=javascript syntax=jquery
-		au BufNewFile,BufRead *.js setlocal foldmethod=marker
 		au BufNewFile,BufRead *.json set filetype=javascript
+		au FileType javascript call JavaScriptFold()
 augroup end
 " }}}
 " Yacc {{{
