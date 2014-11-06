@@ -41,10 +41,8 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundleLazy 'ujihisa/unite-colorscheme', {'autoload': {'unite_sources': 'colorscheme'}}          " Allows unite to auto switch between colorschemes
 NeoBundleLazy 'osyo-manga/unite-fold', {'autoload': {'unite_sources': 'fold'}}                     " Allows unite to get a list of folds in the current buffer
 NeoBundleLazy 'Shougo/neomru.vim', {'autoload':{'unite_sources': ['file_mru', 'directory_mru']}}   " Allows unite to create a list of mru files
-NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}            " Improved indentation and syntax support
 NeoBundle 'kopischke/unite-spell-suggest'                                                          " Allows spell check to use the unite plugin for finding suggestions
 NeoBundle 'Shougo/neocomplete.vim'                                                                 " Auto completion framework. Requires that vim be compiled with lua support
-NeoBundle 'davidhalter/jedi-vim'                                                                   " Python autocompletion
 NeoBundle 'Raimondi/delimitMate'                                                                   " Auto close quotes, parens, brackets, etc
 NeoBundle 'scrooloose/nerdtree'                                                                    " File tree explorer and manager
 NeoBundle 'JarrodCTaylor/vim-256-color-schemes'                                                    " A variety of terminal based colorschemes
@@ -54,21 +52,16 @@ NeoBundle 'scrooloose/syntastic'                                                
 NeoBundle 'vim-scripts/UltiSnips'                                                                  " Ultimate solution for snippets
 NeoBundle 'tpope/vim-commentary'                                                                   " Comment stuff out
 NeoBundle 'mhinz/vim-startify'                                                                     " Fancy splash screen
-NeoBundle 'tmhedberg/SimpylFold'                                                                   " Fold Python source code
 NeoBundle 'JarrodCTaylor/vim-python-test-runner'                                                   " Run Python tests from Vim
 NeoBundle 'tpope/vim-surround'                                                                     " Surround objects with all manor of things
 NeoBundle 'bling/vim-airline'                                                                      " Pretty up the status line
 NeoBundle 'sjl/gundo.vim'                                                                          " Visual undo
-NeoBundle 'nelstrom/vim-markdown-folding'                                                          " Does what it says on the tin
-NeoBundle 'tpope/vim-markdown'                                                                     " Syntax highlighting for markdown (Perhaps optional with new versions of Vim)
 NeoBundle 'justinmk/vim-sneak'                                                                     " Vim motion plugin
 NeoBundle 'JarrodCTaylor/vim-shell-executor'                                                       " Execute any code from within vim buffers
 NeoBundle 'https://github.com/mattn/emmet-vim/'                                                    " Formally zen coding
 NeoBundle 'junegunn/vim-easy-align'                                                                " Simple easy to use alignment plugin
-NeoBundle 'kchmck/vim-coffee-script'                                                               " CoffeeScript support syntax, indenting, etc
 NeoBundle 'JarrodCTaylor/vim-qunit-special-blend'                                                  " Run qunit tests
 NeoBundle 'mustache/vim-mustache-handlebars'                                                       " Handlebars syntax highlighting
-NeoBundle 'JarrodCTaylor/vim-js2coffee'                                                            " Convert JS to CoffeeScript and vice versa
 NeoBundle 'osyo-manga/vim-over'                                                                    " Visual find and replace
 NeoBundle '2ndStopShop/vim-less'                                                                   " Syntax highlighting for less files
 NeoBundle 'Yggdroot/indentLine'                                                                    " Indent guides
@@ -78,7 +71,6 @@ NeoBundle 'thinca/vim-qfreplace'                                                
 NeoBundle 'guns/vim-sexp'                                                                          " Precision editing for S-expressions
 NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'                                             " Make sexp usable
 NeoBundle 'amdt/vim-niji'                                                                          " Rainbow parentheses
-NeoBundle 'lukaszkorecki/CoffeeTags'                                                               " Ctags generator for CoffeScript
 NeoBundle 'tpope/vim-dispatch'                                                                     " Asynchronous build and test dispatcher
 NeoBundle 'kien/ctrlp.vim'                                                                         " Because I just can't get unit to work all the way :(
 NeoBundle 'takac/vim-hardtime'                                                                     " Muhahahahaha oh their faces. I can taste their tears
@@ -87,6 +79,20 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle '~/dotfiles/vim/my-plugins/nerd-search', {'type': 'nosync'}                              " Search in a specific directory from within nerdtree
 NeoBundle '~/dotfiles/vim/my-plugins/vim-grep-quickfix', {'type': 'nosync'}                        " Add grep functionality to the quickfix buffer
 NeoBundle '~/dotfiles/vim/my-plugins/vim-wiki-links', {'type': 'nosync'}                           " Add the ability to link between wiki (markdown) files
+" Python Plugins {{{
+NeoBundleLazy 'tmhedberg/SimpylFold', {'autoload':{'filetypes':['python']}}                        " Fold Python source code
+NeoBundleLazy 'davidhalter/jedi-vim', {'autoload':{'filetypes':['python']}}                        " Python autocompletion
+" }}}
+" Javascript / CoffeeScript {{{
+NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}            " Improved indentation and syntax support
+NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload':{'filetypes':['javascript','coffee']}}       " CoffeeScript support syntax, indenting, etc
+NeoBundleLazy 'JarrodCTaylor/vim-js2coffee', {'autoload':{'filetypes':['javascript','coffee']}}    " Convert JS to CoffeeScript and vice versa
+NeoBundleLazy 'lukaszkorecki/CoffeeTags', {'autoload':{'filetypes':['javascript','coffee']}}       " Ctags generator for CoffeScript
+" }}}
+" Markdown {{{
+NeoBundleLazy 'nelstrom/vim-markdown-folding', {'autoload':{'filetypes':['markdown']}}             " Does what it says on the tin
+NeoBundleLazy 'tpope/vim-markdown', {'autoload':{'filetypes':['markdown']}}                       " Syntax highlighting for markdown (Perhaps optional with new versions of Vim)
+" }}}
 " }}}2
 " Auto install the plugins {{{2
 
@@ -123,6 +129,7 @@ set showcmd                                       " displays incomplete commands
 set noshowmode                                    " don't diplay mode (powerline does it better)
 set backspace=indent,eol,start                    " allow backspacing over everything in insert mode
 set hidden                                        " handle multiple buffers better.
+set number
 set relativenumber                                " display relative line numbers
 set ruler                                         " show the cursor position all the time
 set cursorline                                    " highlight current line
