@@ -122,6 +122,9 @@ export PAGER="less $LESS"
 export MANPAGER=$PAGER
 export GIT_PAGER=$PAGER
 # }}}
+# Specify virtualenv directory {{{
+export WORKON_HOME=$HOME/.virtualenvs
+# }}}
 # Eliminate lag between transition from normal/insert mode {{{
 #-------------------------------------------------------------------------------
 # If this causes issue with other shell commands it can be raised default is 4
@@ -134,3 +137,28 @@ alias rm="rm -i"
 alias l="ls -CF"
 # }}}
 
+# Functions {{{
+# Workon virtualenv {{{
+[[ -a /usr/local/bin/virtualenvwrapper.sh ]] && source /usr/local/bin/virtualenvwrapper.sh
+
+workon_virtualenv() {
+	if [[ -d .git ]]; then
+		VENV_CUR_DIR="${PWD##*/}"
+		if [[ -a ~/.virtualenvs/$VENV_CUR_DIR ]]; then
+			deactivate > /dev/null 2>&1
+			source ~/.virtualenvs/$VENV_CUR_DIR/bin/activate
+		fi
+	fi
+}
+# }}}
+# Run virtual environment functions on cd {{{
+cd() {
+	builtin cd "$@"
+	workon_virtualenv
+}
+# }}}
+# }}}
+
+# rbenv {{{
+eval "$(rbenv init -)"
+}}}

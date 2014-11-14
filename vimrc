@@ -1,14 +1,11 @@
+" vim: foldmethod=marker
 " Preamle ---------------------------------------------------------------------- {{{
 " Use Vim settings, rather than vi sesstings
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-
-" turn on pathogen vim plugin
-" call pathogen#infect()
-
 " }}}
-" NeoBundle auto-installation and setup {{{1
-" Install and configure NeoBundle {{{2
+" NeoBundle auto-installation and setup ---------------------------------------- {{{
+" Install and configure NeoBundle {{{
 let iCanHazNeoBundle=1
 let neobundle_readme=expand($HOME.'/.vim/bundle/neobundle.vim/README.md')
 if !filereadable(neobundle_readme)
@@ -27,16 +24,45 @@ call neobundle#rc(expand($HOME.'/.vim/bundle/'))
 
 " NeoBundle rules NeoBundle (needed!)
 NeoBundle 'Shougo/neobundle.vim'
-" }}}2
-" Bundles {{{2
+" }}}
+" Bundles {{{
+" core {{{
 " Vimproc to asynchronously run commands (NeoBundle, Unite)
+NeoBundle 'bling/vim-airline' "{{{
+	let g:airline#extensions#tabline#enabled = 1
+	let g:airline#extensions#tabline#left_sep=' '
+	let g:airline#extensions#tabline#left_alt_sep='¦'
+""}}}
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'mac' : 'make -f make_mac.mak',
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
-NeoBundle 'Shougo/unite.vim'
+" }}}
+NeoBundle 'scrooloose/nerdtree' "{{{
+	let NERDTreeShowHidden=1
+	let NERDTreeQuitOnOpen=0
+	let NERDTreeShowLineNumbers=1
+	let NERDTreeChDirMode=0
+	let NERDTreeShowBookmarks=1
+	let NERDTreeIgnore=['\.git','\.hg']
+	nnoremap <Leader>nt :NERDTreeToggle<CR>
+	nnoremap <Leader>no :NERDTreeFind<CR>
+"let NERDTreeBookmarksFile=s:get_cache_dir('NERDTreeBookmarks')
+" }}}
+NeoBundle 'Shougo/unite.vim' "{{{
+	nmap <space> [unite]
+	nnoremap [unite] <nop>
+
+	nnoremap <silent> [unite]<space> :<C-u>Unite -toggle -auto-resize -buffer-name=mixed file_rec/async:! buffer file_mru bookmark<cr><c-u>
+	nnoremap <silent> [unite]f :<C-u>Unite -toggle -auto-resize -buffer-name=files file_rec/async:!<cr><c-u>
+	nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
+	nnoremap <silent> [unite]l :<C-u>Unite -auto-resize -buffer-name=line line<cr>
+	nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -buffer-name=buffers buffer<cr>
+	nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
+	nnoremap <silent> [unite]s :<C-u>Unite -quick-match buffer<cr>
+"}}}
 " Unite sources
 NeoBundleLazy 'ujihisa/unite-colorscheme', {'autoload': {'unite_sources': 'colorscheme'}}          " Allows unite to auto switch between colorschemes
 NeoBundleLazy 'osyo-manga/unite-fold', {'autoload': {'unite_sources': 'fold'}}                     " Allows unite to get a list of folds in the current buffer
@@ -44,7 +70,6 @@ NeoBundleLazy 'Shougo/neomru.vim', {'autoload':{'unite_sources': ['file_mru', 'd
 NeoBundle 'kopischke/unite-spell-suggest'                                                          " Allows spell check to use the unite plugin for finding suggestions
 NeoBundle 'Shougo/neocomplete.vim'                                                                 " Auto completion framework. Requires that vim be compiled with lua support
 NeoBundle 'Raimondi/delimitMate'                                                                   " Auto close quotes, parens, brackets, etc
-NeoBundle 'scrooloose/nerdtree'                                                                    " File tree explorer and manager
 NeoBundle 'JarrodCTaylor/vim-256-color-schemes'                                                    " A variety of terminal based colorschemes
 NeoBundle 'majutsushi/tagbar'                                                                      " Display tags in a buffer ordered by class
 NeoBundle 'ervandew/supertab'                                                                      " Use tab for all completions
@@ -54,7 +79,6 @@ NeoBundle 'tpope/vim-commentary'                                                
 NeoBundle 'mhinz/vim-startify'                                                                     " Fancy splash screen
 NeoBundle 'JarrodCTaylor/vim-python-test-runner'                                                   " Run Python tests from Vim
 NeoBundle 'tpope/vim-surround'                                                                     " Surround objects with all manor of things
-NeoBundle 'bling/vim-airline'                                                                      " Pretty up the status line
 NeoBundle 'sjl/gundo.vim'                                                                          " Visual undo
 NeoBundle 'justinmk/vim-sneak'                                                                     " Vim motion plugin
 NeoBundle 'JarrodCTaylor/vim-shell-executor'                                                       " Execute any code from within vim buffers
@@ -72,7 +96,6 @@ NeoBundle 'guns/vim-sexp'                                                       
 NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'                                             " Make sexp usable
 NeoBundle 'amdt/vim-niji'                                                                          " Rainbow parentheses
 NeoBundle 'tpope/vim-dispatch'                                                                     " Asynchronous build and test dispatcher
-NeoBundle 'kien/ctrlp.vim'                                                                         " Because I just can't get unit to work all the way :(
 NeoBundle 'takac/vim-hardtime'                                                                     " Muhahahahaha oh their faces. I can taste their tears
 NeoBundle 'JarrodCTaylor/vim-sql-suggest'                                                          " SQL auto completion
 NeoBundle 'altercation/vim-colors-solarized'
@@ -93,8 +116,8 @@ NeoBundleLazy 'lukaszkorecki/CoffeeTags', {'autoload':{'filetypes':['javascript'
 NeoBundleLazy 'nelstrom/vim-markdown-folding', {'autoload':{'filetypes':['markdown']}}             " Does what it says on the tin
 NeoBundleLazy 'tpope/vim-markdown', {'autoload':{'filetypes':['markdown']}}                       " Syntax highlighting for markdown (Perhaps optional with new versions of Vim)
 " }}}
-" }}}2
-" Auto install the plugins {{{2
+" }}}
+" Auto install the plugins {{{
 
 " First-time plugins installation
 if iCanHazNeoBundle == 0
@@ -105,8 +128,8 @@ endif
 
 " Check if all of the plugins are already installed, in other case ask if we want to install them
 NeoBundleCheck
-" }}}2
-" }}}1
+" }}}
+" }}}
 " Basic Settings --------------------------------------------------------------- {{{
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
@@ -137,7 +160,6 @@ hi CursorLine cterm=NONE ctermfg=NONE ctermbg=235 guibg=#222222
 autocmd WinEnter * setlocal cursorline            " Show current line highlight when entering a window
 autocmd WinLeave * setlocal nocursorline          " Remove current line highlight when leaving a window
 " This unsets the last search pattern register by hitting return
-nnoremap <CR> :noh<CR><CR>
 set title                                         " change terminals title
 set visualbell                                    " no beeping.
 set laststatus=2                                  " show the status line all the time
@@ -150,19 +172,6 @@ set list
 " set listchars=tab:│┈ ,eol:¬,extends:❯,precedes:❮
 set listchars=tab:┊\ ,eol:¬,extends:❯,precedes:❮
 
-" }}}
-" Absolute/Relative Line Numbers ----------------------------------------------- {{{
-function! NumberToggle()
-	echo &relativenumber
-	if &relativenumber == 1
-		set relativenumber!
-		set number
-	else
-		set relativenumber
-	endif
-endfunc
-
-nnoremap <C-n> :call NumberToggle()<cr>
 " }}}
 " WildMenu Completion ---------------------------------------------------------- {{{
 set wildmenu                                      " enhanced command line completion.
@@ -257,10 +266,10 @@ endfunction
 command! PrettyXML call DoPrettyXML()
 " }}}
 " Mappings --------------------------------------------------------------------- {{{
+" toggle relative / normal line numbers
+nnoremap <silent><C-n> :set relativenumber!<cr>
 map <leader>jt  <Esc>:%!json_xs -f json -t json-pretty<CR>
-" NERDTree configuration
-map <Leader>n :NERDTreeToggle<CR>
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <Leader>ud :GundoToggle<CR>
 " Tabs ------------------------------------------------------------------------- {{{
 map <Leader>tt :tabnew<cr>
 map <Leader>te :tabedit
@@ -277,11 +286,18 @@ map <Leader>tm :tabmove
 set foldlevelstart=0
 set foldopen=insert,jump,mark,percent,tag,search
 
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-vnoremap <Space> zf
+" tab to toggle foldes
+nnoremap <silent> <Tab> @=(foldlevel('.')?'za':"\<Tab>")<CR>
+" create fold with tab
+vnoremap <Tab> zf
 
 " "Refocus" folds
 nnoremap ,z zMzvzz
+" output fold level after chage
+nnoremap zr zr:echo &foldlevel<cr>
+nnoremap zm zm:echo &foldlevel<cr>
+nnoremap zR zR:echo &foldlevel<cr>
+nnoremap zM zM:echo &foldlevel<cr>
 
 function! MyFoldText() " {{{
 	let line = getline(v:foldstart)
@@ -319,12 +335,6 @@ au BufNewFile,BufRead Gemfile                    set filetype=ruby
 au BufNewFile,BufRead .autotest                  set filetype=ruby
 " eRuby
 au BufNewFile,BufRead *.erb,*.rhtml              set filetype=eruby
-" }}}
-" Vim {{{
-augroup ft_vim
-	au!
-		au FileType vim setlocal foldmethod=marker
-augroup END
 " }}}
 " PHP {{{
 augroup ft_php
@@ -392,10 +402,4 @@ else
 		set mouse=a
 	endif
 endif
-" }}}
-" Unused ----------------------------------------------------------------------- {{{
-" For all text files set 'textwidth' to 78 characters.
-" autocmd FileType text setlocal textwidth=78
-" let g:Powerline_symbols='fancy'
-" set nofoldenable                            " turn off automatic code folding
 " }}}
