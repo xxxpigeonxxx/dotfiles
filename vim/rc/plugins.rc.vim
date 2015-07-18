@@ -19,4 +19,7 @@ if neobundle#tap('vim-rspec') "{{{
   map <Leader>rs :call RunNearestSpec()<CR>
   map <Leader>rl :call RunLastSpec()<CR>
   map <Leader>ra :call RunAllSpecs()<CR>
+
+  let g:rspec_command = 'call Send_to_Tmux("bundle exec rspec {spec}\n")'
 endif " }}}
+

@@ -57,7 +57,6 @@ call unite#custom#profile('default', 'context', {
 
 call s:source_rc('functions.rc.vim')
 
-let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
 
 " Basic Settings --------------------------------------------------------------- {{{
 " Enable file type detection.
@@ -74,6 +73,7 @@ endif
 
 let mapleader="\\"                                " set leader
 set textwidth=0                                   " don't wrap text
+set colorcolumn=80
 set autoindent                                    " set automatic indentingset automatic indenting
 set history=50                                    " keep 50 lines of command line history
 set nowrap                                        " turn off line wrapping.
