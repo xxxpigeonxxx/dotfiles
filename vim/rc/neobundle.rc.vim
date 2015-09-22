@@ -34,6 +34,8 @@ NeoBundleLazy 'Keithbsmiley/swift.vim', {'autoload': {'filetypes': ['swift']}}
 NeoBundleLazy 'evanmiller/nginx-vim-syntax'
 NeoBundleLazy 'ujihisa/unite-colorscheme', {'autoload': {'unite_sources': 'colorscheme'}}          " Allows unite to auto switch between colorschemes
 NeoBundleLazy 'osyo-manga/unite-fold', {'autoload': {'unite_sources': 'fold'}}                     " Allows unite to get a list of folds in the current buffer
+NeoBundle 'mileszs/ack.vim'
+NeoBundle 'vim-scripts/nerdtree-ack'
 NeoBundle 'kopischke/unite-spell-suggest'                                                          " Allows spell check to use the unite plugin for finding suggestions
 NeoBundle 'Shougo/neocomplete.vim'                                                                 " Auto completion framework. Requires that vim be compiled with lua support
 NeoBundle 'Raimondi/delimitMate'                                                                   " Auto close quotes, parens, brackets, etc
@@ -61,14 +63,14 @@ NeoBundle 'amdt/vim-niji'                                                       
 NeoBundle 'tpope/vim-dispatch'                                                                     " Asynchronous build and test dispatcher
 NeoBundle 'takac/vim-hardtime'                                                                     " Muhahahahaha oh their faces. I can taste their tears
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle '~/dotfiles/vim/my-plugins/nerd-search', {'type': 'nosync'}                              " Search in a specific directory from within nerdtree
 NeoBundle '~/dotfiles/vim/my-plugins/vim-grep-quickfix', {'type': 'nosync'}                        " Add grep functionality to the quickfix buffer
 NeoBundle '~/dotfiles/vim/my-plugins/vim-wiki-links', {'type': 'nosync'}                           " Add the ability to link between wiki (markdown) files
 NeoBundle 'tpope/vim-bundler'
+NeoBundle 'tell-k/vim-browsereload-mac'
 " Ruby {{{
 NeoBundle 'vim-ruby/vim-ruby',    {'autoload':{'filetypes':['ruby']}}
 NeoBundle 'thoughtbot/vim-rspec', {'autoload':{'filetypes':['ruby']}}
-NeoBundle 'keith/rspec.vim',      {'autoload':{'filetypes':['ruby']}}
+"NeoBundle 'keith/rspec.vim',      {'autoload':{'filetypes':['ruby']}}
 NeoBundle 'jgdavey/tslime.vim',   {'autoload':{'filetypes':['ruby']}}
 NeoBundle 'bruno-/vim-ruby-fold'
 " }}}
