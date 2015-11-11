@@ -88,27 +88,22 @@ set number
 set relativenumber                                " display relative line numbers
 set ruler                                         " show the cursor position all the time
 set cursorline                                    " highlight current line
-hi CursorLine cterm=NONE ctermfg=NONE ctermbg=235 guibg=#222222
-autocmd WinEnter * setlocal cursorline            " Show current line highlight when entering a window
-autocmd WinLeave * setlocal nocursorline          " Remove current line highlight when leaving a window
-" This unsets the last search pattern register by hitting return
 set title                                         " change terminals title
 set visualbell                                    " no beeping.
 set laststatus=2                                  " show the status line all the time
 set background=dark
-au FocusLost * :wa                                " Automatically save files when they lose focus
-au VimResized * :wincmd =                         " Resize splits when the window is resized
 set pastetoggle=<f2>
 set list
-" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-" set listchars=tab:│┈ ,eol:¬,extends:❯,precedes:❮
 set listchars=tab:┊\ ,eol:¬,extends:❯,precedes:❮
-
+au WinEnter * setlocal cursorline            " Show current line highlight when entering a window
+au WinLeave * setlocal nocursorline          " Remove current line highlight when leaving a window
+au FocusLost * :wa                                " Automatically save files when they lose focus
+au VimResized * :wincmd =                         " Resize splits when the window is resized
 " }}}
 
 " WildMenu Completion ---------------------------------------------------------- {{{
 set wildmenu                                      " enhanced command line completion.
-set wildmode=list:longest,list:full                " complete files like a shell.
+set wildmode=list:longest,list:full               " complete files like a shell.
 set wildignore+=.hg,.git,.svn                     " Version control
 set wildignore+=*.aux,*.out,*.toc                 " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg    " binary images
@@ -162,6 +157,7 @@ set sidescrolloff=10
 set virtualedit+=block
 " Highlight current word matches
 autocmd CursorMoved * silent! exe printf('match SpellLocal /\<%s\>/', expand('<cword>'))
+hi CursorLine cterm=NONE ctermfg=NONE ctermbg=235 guibg=#222222
 " }}}
 
 " DiffOrig --------------------------------------------------------------------- {{{
