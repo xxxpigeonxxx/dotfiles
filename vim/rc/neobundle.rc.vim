@@ -1,23 +1,5 @@
 " vim: foldmethod=marker
 
-NeoBundle 'bling/vim-airline' "{{{
-	let g:airline#extensions#tabline#enabled = 1
-	let g:airline#extensions#tabline#left_sep=' '
-	let g:airline#extensions#tabline#left_alt_sep='¦'
-"}}}
-
-NeoBundle 'scrooloose/nerdtree' "{{{
-	let NERDTreeShowHidden=1
-	let NERDTreeQuitOnOpen=0
-	let NERDTreeShowLineNumbers=1
-	let NERDTreeChDirMode=0
-	let NERDTreeShowBookmarks=1
-	let NERDTreeIgnore=['\.git','\.hg','\.pyc$']
-	nnoremap <Leader>nt :NERDTreeToggle<CR>
-	nnoremap <Leader>no :NERDTreeFind<CR>
-"let NERDTreeBookmarksFile=s:get_cache_dir('NERDTreeBookmarks')
-" }}}
-
 " Unite {{{
 NeoBundle 'Shougo/unite.vim' "{{{
 NeoBundleLazy 'Kocha/vim-unite-tig'
@@ -26,16 +8,11 @@ NeoBundleLazy 'tsukkee/unite-tag'
 NeoBundleLazy 'Shougo/neomru.vim', {'autoload':{'unite_sources': ['file_mru', 'directory_mru']}}   " Allows unite to create a list of mru files
 " }}}
 " }}}
-
-" Swift {{{
-NeoBundleLazy 'Keithbsmiley/swift.vim', {'autoload': {'filetypes': ['swift']}}
-" }}}
-
 NeoBundleLazy 'evanmiller/nginx-vim-syntax'
 NeoBundleLazy 'ujihisa/unite-colorscheme', {'autoload': {'unite_sources': 'colorscheme'}}          " Allows unite to auto switch between colorschemes
 NeoBundleLazy 'osyo-manga/unite-fold', {'autoload': {'unite_sources': 'fold'}}                     " Allows unite to get a list of folds in the current buffer
 NeoBundle 'rking/ag.vim'
-NeoBundle 'taiansu/nerdtree-ag'
+NeoBundle 'bling/vim-airline'
 NeoBundle 'kopischke/unite-spell-suggest'                                                          " Allows spell check to use the unite plugin for finding suggestions
 NeoBundle 'Shougo/neocomplete.vim'                                                                 " Auto completion framework. Requires that vim be compiled with lua support
 NeoBundle 'Raimondi/delimitMate'                                                                   " Auto close quotes, parens, brackets, etc
@@ -67,11 +44,20 @@ NeoBundle '~/dotfiles/vim/my-plugins/vim-grep-quickfix', {'type': 'nosync'}     
 NeoBundle '~/dotfiles/vim/my-plugins/vim-wiki-links', {'type': 'nosync'}                           " Add the ability to link between wiki (markdown) files
 NeoBundle 'tpope/vim-bundler'
 NeoBundle 'tell-k/vim-browsereload-mac'
+" NerdTree {{{
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'taiansu/nerdtree-ag'
+" }}}
+
 " Ruby {{{
 NeoBundle 'vim-ruby/vim-ruby',    {'autoload':{'filetypes':['ruby']}}
 NeoBundle 'thoughtbot/vim-rspec', {'autoload':{'filetypes':['ruby']}}
 NeoBundle 'jgdavey/tslime.vim',   {'autoload':{'filetypes':['ruby']}}
 NeoBundle 'bruno-/vim-ruby-fold'
+" }}}
+
+" Swift {{{
+NeoBundleLazy 'Keithbsmiley/swift.vim', {'autoload': {'filetypes': ['swift']}}
 " }}}
 
 " Erlang {{{

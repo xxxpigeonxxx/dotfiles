@@ -1,6 +1,17 @@
 " vim: foldmethod=marker
 
-let g:NERDTreeWinSize = 40
+if neobundle#tap('nerdtree') " {{{
+  let g:NERDTreeWinSize = 40
+  let g:NERDTreeShowHidden=1
+  let g:NERDTreeQuitOnOpen=0
+  let g:NERDTreeShowLineNumbers=1
+  let g:NERDTreeChDirMode=0
+  let g:NERDTreeShowBookmarks=1
+  let g:NERDTreeIgnore=['\.git','\.hg','\.pyc$']
+  "let NERDTreeBookmarksFile=s:get_cache_dir('NERDTreeBookmarks')
+  nnoremap <Leader>nt :NERDTreeToggle<CR>
+  nnoremap <Leader>no :NERDTreeFind<CR>
+endif " }}}
 
 if neobundle#tap('unite.vim') " {{{
 
@@ -47,4 +58,14 @@ if neobundle#tap('indentLine') " {{{
   let g:indentLine_color_term = 239
   let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*', 'start*']
   let g:indentLine_fileTypeExclude = ['text']
+endif " }}}
+
+if neobundle#tap('gundo') " {{{
+  nnoremap <Leader>ud :GundoToggle<CR>
+endif " }}}
+
+if neobundle#tap('vim-airline') " {{{
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_sep=' '
+  let g:airline#extensions#tabline#left_alt_sep='¦'
 endif " }}}

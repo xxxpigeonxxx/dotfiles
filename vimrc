@@ -46,7 +46,6 @@ call neobundle#end()
 NeoBundleCheck
 " }}}
 
-
 let g:unite_source_rec_async_command=
   \ ['ag', '--nocolor', '--nogroup', '--ignore', '".hg"', '--ignore', '".svn"',
   \ '--ignore', '".git"', '--ignore', '".bzr"', '--hidden', '-g', '']
@@ -61,7 +60,6 @@ call unite#custom#profile('default', 'context', {
 " }}}
 
 call s:source_rc('functions.rc.vim')
-
 
 " Basic Settings --------------------------------------------------------------- {{{
 " Enable file type detection.
@@ -180,7 +178,6 @@ endif
 " toggle relative / normal line numbers
 nnoremap <silent><C-n> :set relativenumber!<cr>
 map <leader>jt  <Esc>:%!json_xs -f json -t json-pretty<CR>
-nnoremap <Leader>ud :GundoToggle<CR>
 " Tabs ------------------------------------------------------------------------- {{{
 map <Leader>tt :tabnew<cr>
 map <Leader>te :tabedit
@@ -313,12 +310,6 @@ augroup END
 
 " Color Scheme ----------------------------------------------------------------- {{{
 colorscheme harlem-nights
-" }}}
-
-" Plugin Settings -------------------------------------------------------------- {{{
-" Local vimrc {{{
-let g:localvimrc_ask=0                        " dont ask to source local vim rcs
-" }}}
 " }}}
 
 " Environments (GUI/Consoloe) -------------------------------------------------- {{{
