@@ -241,6 +241,8 @@ augroup ft_swift
   au!
     au FileType swift setlocal expandtab
 augroup END
+au BufNewFile,BufRead *.wsdl set filetype=xml
+autocmd BufWritePre *.rb :%s/\s\+$//e
 " Ruby {{{
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
@@ -306,7 +308,12 @@ augroup END
 
 " Color Scheme ----------------------------------------------------------------- {{{
 colorscheme harlem-nights
+"let g:solarized_termtrans = 1
+"let g:solarized_termcolors=256
+"colorscheme solarized
 " }}}
+"let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
 
 " Environments (GUI/Consoloe) -------------------------------------------------- {{{
 if has('gui_running')
