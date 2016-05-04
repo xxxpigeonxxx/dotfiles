@@ -21,23 +21,24 @@ NeoBundle 'Raimondi/delimitMate'                                                
 NeoBundle 'majutsushi/tagbar'                                                                      " Display tags in a buffer ordered by class
 NeoBundle 'ervandew/supertab'                                                                      " Use tab for all completions
 NeoBundle 'scrooloose/syntastic'                                                                   " Syntax checking
-NeoBundle 'vim-scripts/UltiSnips'                                                                  " Ultimate solution for snippets
-NeoBundle 'tpope/vim-commentary'                                                                   " Comment stuff out
-NeoBundle 'tpope/vim-surround'                                                                     " Surround objects with all manor of things
 NeoBundle 'sjl/gundo.vim'                                                                          " Visual undo
-NeoBundle 'justinmk/vim-sneak'                                                                     " Vim motion plugin
-NeoBundle 'JarrodCTaylor/vim-shell-executor'                                                       " Execute any code from within vim buffers
-NeoBundle 'mattn/emmet-vim/'                                                                       " Formally zen coding
 NeoBundle 'junegunn/vim-easy-align'                                                                " Simple easy to use alignment plugin
-NeoBundle 'osyo-manga/vim-over'                                                                    " Visual find and replace
 NeoBundle 'Yggdroot/indentLine'                                                                    " Indent guides
-NeoBundle 'wellle/targets.vim'                                                                     " Provide additional text objects
+NeoBundle 'takac/vim-hardtime'                                                                     " Muhahahahaha oh their faces. I can taste their tears
+NeoBundle 'tell-k/vim-browsereload-mac'
+"NeoBundle 'vim-scripts/UltiSnips'                                                                  " Ultimate solution for snippets
+"NeoBundle 'tpope/vim-commentary'                                                                   " Comment stuff out
+"NeoBundle 'tpope/vim-surround'                                                                     " Surround objects with all manor of things
+"NeoBundle 'justinmk/vim-sneak'                                                                     " Vim motion plugin
+"NeoBundle 'JarrodCTaylor/vim-shell-executor'                                                       " Execute any code from within vim buffers
+"NeoBundle 'mattn/emmet-vim/'                                                                       " Formally zen coding
+"NeoBundle 'osyo-manga/vim-over'                                                                    " Visual find and replace
+"NeoBundle 'wellle/targets.vim'                                                                     " Provide additional text objects
 "NeoBundle 'tpope/vim-fireplace'                                                                    " Clojure REPL support
 "NeoBundle 'thinca/vim-qfreplace'                                                                   " Easy replace in the quick fix buffer
 "NeoBundle 'guns/vim-sexp'                                                                          " Precision editing for S-expressions
 "NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'                                             " Make sexp usable
-NeoBundle 'takac/vim-hardtime'                                                                     " Muhahahahaha oh their faces. I can taste their tears
-NeoBundle 'tell-k/vim-browsereload-mac'
+NeoBundle 'mhinz/vim-hugefile'
 " }}}
 
 " NerdTree {{{
@@ -51,6 +52,7 @@ NeoBundle 'thoughtbot/vim-rspec', {'autoload':{'filetypes':['ruby']}}
 NeoBundle 'jgdavey/tslime.vim',   {'autoload':{'filetypes':['ruby']}}
 NeoBundle 'bruno-/vim-ruby-fold'
 NeoBundle 'tpope/vim-bundler'
+NeoBundle 'sorah/unite-bundler'
 " }}}
 
 " Swift {{{
@@ -62,7 +64,7 @@ NeoBundle 'elixir-lang/vim-elixir', {'autoload':{'filetypes':['elixir']}}
 " }}}
 
 " Erlang {{{
-NeoBundleLazy 'jimenezrick/vimerl', {'autoload':{'filetypes':['erlang']}}
+NeoBundleLazy 'jimenezrick/vimerl',      {'autoload':{'filetypes':['erlang']}}
 NeoBundleLazy 'vim-erlang/vim-dialyzer', {'autoload':{'filetypes':['erlang']}}
 " }}}
 
@@ -73,12 +75,17 @@ NeoBundleLazy 'JarrodCTaylor/vim-python-test-runner', {'autoload':{'filetypes':[
 " }}}
 
 " Javascript {{{
-NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}            " Improved indentation and syntax support
+"NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}            " Improved indentation and syntax support
+NeoBundleLazy 'isRuslan/vim-es6', {'autoload':{'filetypes':['javascript']}}            " Improved indentation and syntax support
 " }}}
 
 " Markdown {{{
 NeoBundleLazy 'nelstrom/vim-markdown-folding', {'autoload':{'filetypes':['markdown']}}             " Does what it says on the tin
-NeoBundleLazy 'tpope/vim-markdown', {'autoload':{'filetypes':['markdown']}}                        " Syntax highlighting for markdown (Perhaps optional with new versions of Vim)
+"NeoBundleLazy 'tpope/vim-markdown', {'autoload':{'filetypes':['markdown']}}                        " Syntax highlighting for markdown (Perhaps optional with new versions of Vim)
+" }}}
+
+" YAML {{{
+NeoBundleLazy 'avakhov/vim-yaml'
 " }}}
 
 " Color Schemes {{{

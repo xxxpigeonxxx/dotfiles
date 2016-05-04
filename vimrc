@@ -156,7 +156,7 @@ set sidescroll=1
 set sidescrolloff=10
 set virtualedit+=block
 " Highlight current word matches
-autocmd CursorMoved * silent! exe printf('match SpellLocal /\<%s\>/', expand('<cword>'))
+autocmd CursorMoved * if getfsize(@%) < 1000000 | silent! exe printf('match SpellLocal /\<%s\>/', expand('<cword>')) | endif
 hi CursorLine cterm=NONE ctermfg=NONE ctermbg=235 guibg=#222222
 " }}}
 
