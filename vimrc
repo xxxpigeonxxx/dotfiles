@@ -49,7 +49,6 @@ endif
 
 let mapleader="\\"                                " set leader
 set textwidth=0                                   " don't wrap text
-set colorcolumn=80
 set autoindent                                    " set automatic indentingset automatic indenting
 set history=50                                    " keep 50 lines of command line history
 set nowrap                                        " turn off line wrapping.
@@ -236,12 +235,6 @@ au BufNewFile,BufRead .autotest                  set filetype=ruby
 " eRuby
 au BufNewFile,BufRead *.erb,*.rhtml              set filetype=eruby
 " }}}
-" PHP {{{
-augroup ft_php
-  au!
-    au FileType php setlocal foldmethod=marker
-augroup END
-" }}}
 " conf {{{
 augroup ft_conf
   au!
@@ -285,7 +278,6 @@ colorscheme harlem-nights
 "let g:solarized_termcolors=256
 "colorscheme solarized
 " }}}
-au FileType xml setlocal foldmethod=syntax
 
 " Environments (GUI/Consoloe) -------------------------------------------------- {{{
 if has('gui_running')
