@@ -47,6 +47,7 @@ if &t_Co > 2 || has("gui_running")
   syntax on
 endif
 
+set clipboard=unnamed
 let mapleader="\\"                                " set leader
 set textwidth=0                                   " don't wrap text
 set autoindent                                    " set automatic indentingset automatic indenting
