@@ -16,7 +16,7 @@ antigen bundle ruby
 antigen bundle powder
 antigen bundle rails
 antigen bundle gem
-antigen bundle tmuxinator
+# antigen bundle tmuxinator
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -126,8 +126,8 @@ PATH="/usr/local/bin:$PATH"
 # }}}
 # Editor and display configurations {{{
 #-------------------------------------------------------------------------------
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 export GIT_EDITOR=$EDITOR
 export LESS='-imJMWR'
 export PAGER="less $LESS"

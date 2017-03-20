@@ -4,7 +4,8 @@
 if has('vim_starting')
   set nocompatible
   set rtp+=$HOME/.vim/bundle/neobundle.vim/
-  set runtimepath^=$HOME/.dein/repos/github.com/Shougo/dein.vim
+  set runtimepath+=/Users/epigeon/.cache/dein/repos/github.com/Shougo/dein.vim
+  " set runtimepath^=$HOME/.dein/repos/github.com/Shougo/dein.vim
 endif
 " }}}
 
@@ -15,13 +16,24 @@ endfunction
 " }}}
 
 " Dein {{{
-call dein#begin(expand('~/.cache/dein'))
-call dein#add('Shougo/dein.vim')
-call s:source_rc('dein.rc.vim')
+" if dein#load_state('/Users/epigeon/.cache/dein')
+  call dein#begin('/Users/epigeon/.cache/dein')
+  call dein#add('/Users/epigeon/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  
+  call s:source_rc('dein.rc.vim')
+
+  call dein#end()
+  call dein#save_state()
+" endif
+
+filetype plugin indent on
+syntax enable
+
 if dein#check_install()
   call dein#install()
 endif
-call dein#end()
+
 " }}}
 
 call s:source_rc('plugins.rc.vim')
@@ -29,13 +41,13 @@ call s:source_rc('plugins.rc.vim')
 let g:unite_source_rec_async_command=
   \ ['ag', '--nocolor', '--nogroup', '--ignore', '".hg"', '--ignore', '".svn"',
   \ '--ignore', '".git"', '--ignore', '".bzr"', '--hidden', '-g', '']
-call unite#custom#source('file_rec/async', 'ignore_pattern', '\.sass-cache/\|tmp/')
-call unite#filters#matcher_default#use(['matcher_fuzzy']) " use fuzzy search by default
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#profile('default', 'context', {
-  \ 'start_insert': 1,
-  \ 'direction': 'botright'
-  \ })
+" call unite#custom#source('file_rec/async', 'ignore_pattern', '\.sass-cache/\|tmp/')
+" call unite#filters#matcher_default#use(['matcher_fuzzy']) " use fuzzy search by default
+" call unite#filters#sorter_default#use(['sorter_rank'])
+" call unite#custom#profile('default', 'context', {
+"   \ 'start_insert': 1,
+"   \ 'direction': 'botright'
+"   \ })
 
 call s:source_rc('functions.rc.vim')
 
@@ -161,7 +173,7 @@ map <Leader>tm :tabmove
 " }}}
 
 " Folding ---------------------------------------------------------------------- {{{
-set foldlevelstart=1
+set foldlevelstart=2
 set foldopen=insert,jump,mark,percent,tag,search
 
 " tab to toggle foldes
@@ -215,6 +227,7 @@ augroup ft_swift
     au FileType swift setlocal expandtab
 augroup END
 au BufNewFile,BufRead *.wsdl set filetype=xml
+au BufNewFile,BufRead *.decorator set filetype=ruby
 autocmd BufWritePre *.rb :%s/\s\+$//e
 " Ruby {{{
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
