@@ -16,11 +16,9 @@ endfunction
 " }}}
 
 " Dein {{{
-" if dein#load_state('/Users/epigeon/.cache/dein')
   call dein#begin('/Users/epigeon/.cache/dein')
   call dein#add('/Users/epigeon/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-  
   call s:source_rc('dein.rc.vim')
 
   call dein#end()
@@ -41,13 +39,18 @@ call s:source_rc('plugins.rc.vim')
 let g:unite_source_rec_async_command=
   \ ['ag', '--nocolor', '--nogroup', '--ignore', '".hg"', '--ignore', '".svn"',
   \ '--ignore', '".git"', '--ignore', '".bzr"', '--hidden', '-g', '']
-" call unite#custom#source('file_rec/async', 'ignore_pattern', '\.sass-cache/\|tmp/')
+call unite#custom#source('file_rec/async', 'ignore_pattern', '\.sass-cache/\|tmp/')
 " call unite#filters#matcher_default#use(['matcher_fuzzy']) " use fuzzy search by default
-" call unite#filters#sorter_default#use(['sorter_rank'])
-" call unite#custom#profile('default', 'context', {
-"   \ 'start_insert': 1,
-"   \ 'direction': 'botright'
-"   \ })
+call unite#filters#matcher_default#use(['matcher_regexp'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#filters#sorter_default#use(['sorter_sorter_selecta'])
+call unite#custom#profile('default', 'context', {
+  \ 'start_insert': 1,
+  \ 'direction': 'botright'
+  \ })
+
+" fuck you shougo
+call camelcasemotion#CreateMotionMappings('<leader>')
 
 call s:source_rc('functions.rc.vim')
 
@@ -301,3 +304,5 @@ else
   endif
 endif
 " }}}
+"
+au VimLeave * set guicursor=a:hor20-Cursor/lCursor-blinkon1
