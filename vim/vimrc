@@ -1,19 +1,8 @@
-" Note: Skip initialization for vim-tiny or vim-small.
-if 1
-  execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/main.vim'
-endif
-" vim:set et sw=2
-
 " vim: foldmethod=marker
 
-" Preamle ---------------------------------------------------------------------- {{{
-if has('vim_starting')
+if &compatible
   set nocompatible
-  set rtp+=$HOME/.vim/bundle/neobundle.vim/
-  set runtimepath+=/Users/epigeon/.cache/dein/repos/github.com/Shougo/dein.vim
-  " set runtimepath^=$HOME/.dein/repos/github.com/Shougo/dein.vim
 endif
-" }}}
 
 " Function source_rc {{{
 function! s:source_rc(path)
@@ -21,15 +10,26 @@ function! s:source_rc(path)
 endfunction
 " }}}
 
+" dein Scripts ---------------------------------------------------------------- {{{
+if has('vim_starting')
+  set runtimepath+=/Users/epigeon/.cache/dein/repos/github.com/Shougo/dein.vim
+endif
+" }}}
+
 " Dein {{{
+if dein#load_state('/Users/epigeon/.cache/dein')
   call dein#begin('/Users/epigeon/.cache/dein')
+
+  " Let dein manage dein
+  " Required:
   call dein#add('/Users/epigeon/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   call s:source_rc('dein.rc.vim')
 
+  " Required:
   call dein#end()
   call dein#save_state()
-" endif
+endif
 
 filetype plugin indent on
 syntax enable
@@ -41,6 +41,7 @@ endif
 " }}}
 
 call s:source_rc('plugins.rc.vim')
+let g:deoplete#enable_at_startup = 1
 
 let g:pigeonvim_wildignore
       \ = '*/tmp/*,*.so,*.swp,*.zip,*.class,tags,*.jpg,
@@ -51,10 +52,27 @@ let g:denite_source_rec_async_command=
   \ ['ag', '--nocolor', '--nogroup', '--ignore', '".hg"', '--ignore', '".svn"',
   \ '--ignore', '".git"', '--ignore', '".bzr"', '--hidden', '-g', '']
 
-call denite#custom#var('file_rec', 'command',
+call denite#custom#var('file/rec', 'command',
       \ ['ag' , '--nocolor', '--nogroup', '-g', '']
       \ + zvim#util#Generate_ignore(g:pigeonvim_wildignore, 'ag')
       \ )
+
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
 
 call denite#custom#map(
       \ 'insert',
@@ -69,13 +87,18 @@ call denite#custom#map(
       \ 'noremap'
       \)
 
+call denite#custom#option('default', {
+      \ 'highlight_filter_background': 'CursorLine',
+      \ 'source_names': 'short',
+      \ 'split': 'floating',
+      \ })
+
 " fuck you shougo
 call camelcasemotion#CreateMotionMappings('<leader>')
 
 call s:source_rc('functions.rc.vim')
 
 " Basic Settings --------------------------------------------------------------- {{{
-filetype plugin indent on
 
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
@@ -283,10 +306,8 @@ augroup END
 " Javascript/Json {{{
 augroup ft_javascript
   au!
-  " au BufNewFile,BufRead *.js set filetype=javascript syntax=jquery
     au BufNewFile,BufRead *.js.erb set filetype=javascript
-    "au BufNewFile,BufRead *.json set filetype=javascript
-    au FileType javascript call JavaScriptFold()
+    " au FileType javascript call JavaScriptFold()
 augroup end
 " }}}
 " Yacc {{{

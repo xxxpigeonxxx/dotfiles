@@ -1,7 +1,5 @@
 " vim: foldmethod=marker
 
-let g:sql_type_default = 'pgsql'
-
 if dein#tap('nerdtree') " {{{
   let g:NERDTreeWinSize = 40
   let g:NERDTreeShowHidden=1
@@ -10,24 +8,44 @@ if dein#tap('nerdtree') " {{{
   let g:NERDTreeChDirMode=0
   let g:NERDTreeShowBookmarks=1
   let g:NERDTreeIgnore=['\.git','\.hg','\.pyc$']
-  "let NERDTreeBookmarksFile=s:get_cache_dir('NERDTreeBookmarks')
   nnoremap <Leader>nt :NERDTreeToggle<CR>
   nnoremap <Leader>no :NERDTreeFind<CR>
 endif " }}}
 
-if dein#tap('denite.nvim') " {{{
+if dein#tap('deoplete.vim') " {{{
+  " <TAB>: completion.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ deoplete#manual_complete()
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
 
+  " <S-TAB>: completion back.
+  inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+
+  inoremap <expr><C-g>       deoplete#refresh()
+  inoremap <expr><C-e>       deoplete#cancel_popup()
+  inoremap <silent><expr><C-l>       deoplete#complete_common_string()
+
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function() abort
+    return pumvisible() ? deoplete#close_popup()."\<CR>" : "\<CR>"
+  endfunction
+endif "}}}
+
+if dein#tap('denite.nvim') " {{{
   nnoremap [denite] <nop>
   nmap <space> [denite]
 
-   nnoremap <silent> [denite]<space> :<C-u>Denite -toggle -auto-resize -buffer-name=mixed file_rec/async:! buffer file_mru bookmark<cr><c-u>
-   nnoremap <silent> [denite]f       :<C-u>Denite file_rec<cr>
+   "nnoremap <silent> [denite]<space> :<C-u>Denite -toggle -auto-resize -buffer-name=mixed file/rec:! buffer file_mru bookmark<cr><c-u>
+   nnoremap <silent> [denite]f       :<C-u>Denite file/rec<cr>
    nnoremap <silent> [denite]z       :<C-u>Denite fold<cr>
-   nnoremap <silent> [denite]l       :<C-u>Denite -auto-resize -buffer-name=line line<cr>
-   nnoremap <silent> [denite]b       :<C-u>Denite -auto-resize -buffer-name=buffers buffer<cr>
-   nnoremap <silent> [denite]m       :<C-u>Denite -auto-resize -buffer-name=mappings mapping<cr>
-   nnoremap <silent> [denite]s       :<C-u>Denite -quick-match buffer<cr>
-   nnoremap <silent> [denite]g       :<C-u>Denite bundler<cr>
+   nnoremap <silent> [denite]l       :<C-u>Denite line<cr>
+   nnoremap <silent> [denite]b       :<C-u>Denite buffer<cr>
 endif " }}}
 
 if dein#tap('vim-rspec') "{{{
