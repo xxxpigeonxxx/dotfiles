@@ -10,90 +10,10 @@ function! s:source_rc(path)
 endfunction
 " }}}
 
-" dein Scripts ---------------------------------------------------------------- {{{
-if has('vim_starting')
-  set runtimepath+=/Users/epigeon/.cache/dein/repos/github.com/Shougo/dein.vim
-endif
-" }}}
-
-" Dein {{{
-if dein#load_state('/Users/epigeon/.cache/dein')
-  call dein#begin('/Users/epigeon/.cache/dein')
-
-  " Let dein manage dein
-  " Required:
-  call dein#add('/Users/epigeon/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-  call s:source_rc('dein.rc.vim')
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
-filetype plugin indent on
-syntax enable
-
-if dein#check_install()
-  call dein#install()
-endif
-
-" }}}
+call s:source_rc('plug.vim')
 
 call s:source_rc('plugins.rc.vim')
-let g:deoplete#enable_at_startup = 1
 
-let g:pigeonvim_wildignore
-      \ = '*/tmp/*,*.so,*.swp,*.zip,*.class,tags,*.jpg,
-      \*.ttf,*.TTF,*.png,*/target/*,
-      \.git,.svn,.hg,.DS_Store,*.svg'
-
-let g:denite_source_rec_async_command=
-  \ ['ag', '--nocolor', '--nogroup', '--ignore', '".hg"', '--ignore', '".svn"',
-  \ '--ignore', '".git"', '--ignore', '".bzr"', '--hidden', '-g', '']
-
-call denite#custom#var('file/rec', 'command',
-      \ ['ag' , '--nocolor', '--nogroup', '-g', '']
-      \ + zvim#util#Generate_ignore(g:pigeonvim_wildignore, 'ag')
-      \ )
-
-" Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
-endfunction
-
-call denite#custom#map(
-      \ 'insert',
-      \ '<Down>',
-      \ '<denite:move_to_next_line>',
-      \ 'noremap'
-      \)
-call denite#custom#map(
-      \ 'insert',
-      \ '<Up>',
-      \ '<denite:move_to_previous_line>',
-      \ 'noremap'
-      \)
-
-call denite#custom#option('default', {
-      \ 'highlight_filter_background': 'CursorLine',
-      \ 'source_names': 'short',
-      \ 'split': 'floating',
-      \ })
-
-" fuck you shougo
 call camelcasemotion#CreateMotionMappings('<leader>')
 
 call s:source_rc('functions.rc.vim')
@@ -204,7 +124,7 @@ endif
 " Mappings --------------------------------------------------------------------- {{{
 " toggle relative / normal line numbers
 nnoremap <silent><C-n> :set relativenumber!<cr>
-map <leader>jt  <Esc>:%!json_xs -f json -t json-pretty<CR>
+map <leader>jt  <Esc>:%!python -m json.tool<CR>
 " Tabs ------------------------------------------------------------------------- {{{
 map <Leader>tt :tabnew<cr>
 map <Leader>te :tabedit
@@ -345,5 +265,5 @@ else
   endif
 endif
 " }}}
-"
+
 au VimLeave * set guicursor=a:hor20-Cursor/lCursor-blinkon1
