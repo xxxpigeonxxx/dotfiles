@@ -4,6 +4,8 @@ if &compatible
   set nocompatible
 endif
 
+let g:airline_theme = "palenight"
+
 " Function source_rc {{{
 function! s:source_rc(path)
   execute 'source' fnameescape(expand('~/.vim/rc/' . a:path))
@@ -17,6 +19,12 @@ call s:source_rc('plugins.rc.vim')
 call camelcasemotion#CreateMotionMappings('<leader>')
 
 call s:source_rc('functions.rc.vim')
+
+" Commands --------------------------------------------------------------------- {{{
+" Count {{{
+command! -nargs=1 Count execute printf('%%s/%s//gn', escape(<q-args>, '/')) | normal! ``
+" }}}
+" }}}
 
 " Basic Settings --------------------------------------------------------------- {{{
 
@@ -111,16 +119,6 @@ autocmd CursorMoved * if getfsize(@%) < 1000000 | silent! exe printf('match Spel
 hi CursorLine cterm=NONE ctermfg=NONE ctermbg=235 guibg=#222222
 " }}}
 
-" DiffOrig --------------------------------------------------------------------- {{{
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-      \ | wincmd p | diffthis
-endif
-" }}}
-
 " Mappings --------------------------------------------------------------------- {{{
 " toggle relative / normal line numbers
 nnoremap <silent><C-n> :set relativenumber!<cr>
@@ -192,29 +190,6 @@ augroup ft_swift
   au!
     au FileType swift setlocal expandtab
 augroup END
-au BufNewFile,BufRead *.wsdl set filetype=xml
-au BufNewFile,BufRead *.decorator set filetype=ruby
-autocmd BufWritePre *.rb :%s/\s\+$//e
-" Ruby {{{
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-au BufNewFile,BufRead *.rb,*.rbw,*.gem,*.gemspec set filetype=ruby foldmethod=syntax
-" Rakefile
-au BufNewFile,BufRead [rR]akefile,*.rake         set filetype=ruby
-" IRB config
-au BufNewFile,BufRead .irbrc,irbrc               set filetype=ruby
-" Rackup
-au BufNewFile,BufRead *.ru                       set filetype=ruby
-" Capistrano
-au BufNewFile,BufRead Capfile                    set filetype=ruby
-" Bundler
-au BufNewFile,BufRead Gemfile                    set filetype=ruby
-" Autotest
-au BufNewFile,BufRead .autotest                  set filetype=ruby
-" eRuby
-au BufNewFile,BufRead *.erb,*.rhtml              set filetype=eruby
-" }}}
 " conf {{{
 augroup ft_conf
   au!
@@ -251,7 +226,8 @@ augroup END
 " }}}
 
 " Color Scheme ----------------------------------------------------------------- {{{
-colorscheme harlem-nights
+" colorscheme harlem-nights
+colorscheme palenight
 "let g:solarized_termtrans = 1
 "let g:solarized_termcolors=256
 "colorscheme solarized
@@ -267,3 +243,11 @@ endif
 " }}}
 
 au VimLeave * set guicursor=a:hor20-Cursor/lCursor-blinkon1
+
+nmap <leader>sp :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
