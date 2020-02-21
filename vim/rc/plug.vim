@@ -4,12 +4,23 @@ call plug#begin('/Users/epigeon/.cache/vim-plugged')
 
 " Global {{{
 Plug 'bkad/CamelCaseMotion'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug '/usr/local/opt/fzf'
 Plug '/Users/epigeon/Documents/Projects/Vim/fzf.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+"let g:deoplete#enable_at_startup = 1
+"if has('nvim')
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'roxma/nvim-yarp'
+"  Plug 'roxma/vim-hug-neovim-rpc'
+"endif
 Plug 'Konfekt/FastFold'
 Plug 'bling/vim-airline'
-" Plug 'vim-syntastic/syntastic'    " Syntax checking
 Plug 'dense-analysis/ale'
 Plug 'junegunn/vim-easy-align' " Simple easy to use alignment plugin
 Plug 'sjl/gundo.vim'           " Visual undo
@@ -44,7 +55,11 @@ Plug 'avakhov/vim-yaml'
 " }}}
 
 " Go {{{
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+if has('nvim')
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+else
+  Plug 'govim/govim'
+end
 " }}}
 
 " Color Schemes {{{
