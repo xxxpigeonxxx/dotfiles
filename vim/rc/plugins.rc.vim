@@ -18,6 +18,74 @@ endif
   nnoremap <Leader>no :NERDTreeFind<CR>
 " }}}
 
+" YouCompleteMe {{{
+let g:ycm_language_server = [
+  \   {
+  \     'name': 'yaml',
+  \     'cmdline': [ 'node', expand( '$HOME/.vim/lsp/yaml/node_modules/.bin/yaml-language-server' ), '--stdio' ],
+  \     'filetypes': [ 'yaml' ],
+  \   },
+  "\   {
+  "\     'name': 'php',
+  "\     'cmdline': [ 'php', expand( '$HOME/.vim/lsp/php/vendor/bin/php-language-server.php' ) ],
+  "\     'filetypes': [ 'php' ],
+  "\   },
+  "\   {
+  "\     'name': 'json',
+  "\     'cmdline': [ 'node', expand( '$HOME/.vim/lsp/json/node_modules/.bin/vscode-json-languageserver' ), '--stdio' ],
+  "\     'filetypes': [ 'json' ],
+  "\   },
+  \   {
+  \     'name': 'ruby',
+  \     'cmdline': [ expand( '$HOME/.vim/lsp/ruby/bin/solargraph' ), 'stdio' ],
+  \     'filetypes': [ 'ruby' ],
+  \   }
+  "\   { 'name': 'kotlin',
+  "\     'filetypes': [ 'kotlin' ], 
+  "\     'cmdline': [ expand( '$HOME/.vim/lsp/kotlin/server/build/install/server/bin/server' ) ],
+  "\   },
+  "\   { 'name': 'd',
+  "\     'filetypes': [ 'd' ], 
+  "\     'cmdline': [ expand( '$HOME/.vim/lsp/d/serve-d' ) ],
+  "\   },
+  "\   { 'name': 'vue',
+  "\     'filetypes': [ 'vue' ], 
+  "\     'cmdline': [ expand( '$HOME/.vim/lsp/vue/node_modules/.bin/vls' ) ]
+  "\   },
+  "\   { 'name': 'docker',
+  "\     'filetypes': [ 'dockerfile' ], 
+  "\     'cmdline': [ expand( '$HOME/.vim/lsp/docker/node_modules/.bin/docker-langserver' ), '--stdio' ]
+  "\   },
+  "\   { 'name': 'vim',
+  "\     'filetypes': [ 'vim' ],
+  "\     'cmdline': [ expand( '$HOME/.vim/lsp/viml/node_modules/.bin/vim-language-server' ), '--stdio' ]
+  "\   },
+  "\   { 'name': 'scala',
+  "\     'filetypes': [ 'scala' ],
+  "\     'cmdline': [ 'metals-vim' ],
+  "\     'project_root_files': [ 'build.sbt' ]
+  "\   },
+  "\   { 'name': 'purescript',
+  "\     'filetypes': [ 'purescript' ],
+  "\     'cmdline': [ expand( '$HOME/.vim/lsp/viml/node_modules/.bin/purescript-language-server' ), '--stdio' ]
+  "\   },
+  "\   { 'name': 'fortran',
+  "\     'filetypes': [ 'fortran' ],
+  "\     'cmdline': [ 'fortls' ],
+  "\   },
+  "\   { 'name': 'haskell',
+  "\     'filetypes': [ 'haskell', 'hs', 'lhs' ],
+  "\     'cmdline': [ 'hie-wrapper', '--lsp' ],
+  "\     'project_root_files': [ '.stack.yaml', 'cabal.config', 'package.yaml' ]
+  "\   },
+  "\   { 'name': 'julia',
+  "\     'filetypes': [ 'julia' ],
+  "\     'project_root_files': [ 'Project.toml' ],
+  "\     'cmdline': <See note below>
+  "\   }
+  \ ]
+" }}}
+
 "" Deoplete {{{
 "" <TAB>: completion.
 "inoremap <silent><expr> <TAB>
